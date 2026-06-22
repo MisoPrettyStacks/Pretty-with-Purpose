@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pretty with Purpose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #FDFBFB;
+      color: #1e293b;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { top: -10%; left: -10%; width: 50%; height: 50%; background: rgba(255,228,230,0.5); }
+    .blob-2 { top: 20%; right: -10%; width: 40%; height: 40%; background: rgba(255,237,213,0.5); filter: blur(120px); }
+    .blob-3 { bottom: -10%; left: 20%; width: 60%; height: 60%; background: rgba(237,233,254,0.4); filter: blur(150px); }
+    header {
+      position: relative;
+      padding: 80px 24px 64px;
+      text-align: center;
+      z-index: 10;
+    }
+    .header-eyebrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .sparkle { color: #fca5a5; margin-bottom: 16px; opacity: 0.8; }
+    .eyebrow-text {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+    .divider-line { width: 48px; height: 1px; background: #fecdd3; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 7vw, 72px);
+      font-weight: 500;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+    h1 .italic-rose { font-style: italic; font-weight: 300; color: #fb7185; }
+    .subtitle {
+      font-weight: 300;
+      color: #64748b;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .credit-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .credit-by { font-size: 14px; color: #94a3b8; }
+    .credit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(203,213,225,0.6);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .credit-badge:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #fecdd3; }
+    .credit-name { font-family: 'Playfair Display', serif; font-style: italic; color: #f43f5e; font-weight: 500; }
+    .credit-handle { font-size: 12px; color: #94a3b8; }
+    main { position: relative; z-index: 10; padding: 48px 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(241,245,249,0.5);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      transition: all 0.5s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .card-cover {
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      background: linear-gradient(135deg, rgba(248,250,252,0.5), rgba(255,228,230,0.3));
+      border-bottom: 1px solid rgba(241,245,249,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-cover-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 192px; height: 192px;
+      background: white;
+      border-radius: 50%;
+      filter: blur(24px);
+      opacity: 0.6;
+    }
+    .book {
+      position: relative;
+      width: 176px;
+      height: 240px;
+      border-radius: 2px;
+      box-shadow: 10px 0 20px rgba(0,0,0,0.05), 0 4px 10px rgba(0,0,0,0.02);
+      overflow: hidden;
+      transition: all 0.5s;
+      z-index: 1;
+    }
+    .card:hover .book { transform: scale(1.05) rotate(1deg); }
+    .book-spine-outer { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; z-index: 10; }
+    .book-spine-inner { position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.4); z-index: 10; }
+    .book-top { height: 33%; display: flex; align-items: center; justify-content: center; }
+    .book-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid currentColor; opacity: 0.2; display: flex; align-items: center; justify-content: center; }
+    .book-circle-inner { width: 12px; height: 12px; border-radius: 50%; background: currentColor; opacity: 0.3; }
+    .book-body { padding: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .book-title { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: 0.02em; }
+    .book-rule { width: 32px; height: 1px; margin: 12px auto; }
+    .book-edition { font-size: 7px; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.6; }
+    .book-author { font-size: 7px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; opacity: 0.4; }
+    .book-corner-tr { position: absolute; top: 8px; right: 8px; width: 12px; height: 12px; border-top: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1); }
+    .book-corner-br { position: absolute; bottom: 8px; right: 8px; width: 12px; height: 12px; border-bottom: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1); }
+    .book-rose { background: linear-gradient(to bottom,#fff1f2,rgba(255,228,230,0.5)); border-left: 4px solid #fecdd3; border-top: 1px solid rgba(255,255,255,0.8); border-right: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); }
+    .book-rose .book-spine-outer { background: rgba(139,0,0,0.05); }
+    .book-rose .book-top { background: rgba(139,0,0,0.05); color: #4c0519; }
+    .book-rose .book-title, .book-rose .book-edition, .book-rose .book-author { color: #4c0519; }
+    .book-rose .book-rule { background: #fda4af; }
+    .book-stone { background: linear-gradient(to bottom,#fafaf9,rgba(245,245,244,0.5)); border-left: 4px solid #d6d3d1; border-top: 1px solid rgba(255,255,255,0.8); border-right: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); }
+    .book-stone .book-spine-outer { background: rgba(28,25,23,0.05); }
+    .book-stone .book-top { background: rgba(28,25,23,0.05); color: #1c1917; }
+    .book-stone .book-title, .book-stone .book-edition, .book-stone .book-author { color: #1c1917; }
+    .book-stone .book-rule { background: #a8a29e; }
+    .book-indigo { background: linear-gradient(to bottom,#eef2ff,rgba(224,231,255,0.5)); border-left: 4px solid #c7d2fe; border-top: 1px solid rgba(255,255,255,0.8); border-right: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); }
+    .book-indigo .book-spine-outer { background: rgba(30,27,75,0.05); }
+    .book-indigo .book-top { background: rgba(30,27,75,0.05); color: #1e1b4b; }
+    .book-indigo .book-title, .book-indigo .book-edition, .book-indigo .book-author { color: #1e1b4b; }
+    .book-indigo .book-rule { background: #a5b4fc; }
+    .book-amber { background: linear-gradient(to bottom,#fffbeb,rgba(254,243,199,0.5)); border-left: 4px solid #fde68a; border-top: 1px solid rgba(255,255,255,0.8); border-right: 1px solid rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.8); }
+    .book-amber .book-spine-outer { background: rgba(67,20,7,0.05); }
+    .book-amber .book-top { background: rgba(67,20,7,0.05); color: #451a03; }
+    .book-amber .book-title, .book-amber .book-edition, .book-amber .book-author { color: #451a03; }
+    .book-amber .book-rule { background: #fcd34d; }
+    .card-body { padding: 32px 40px; display: flex; flex-direction: column; flex: 1; }
+    .card-badge { font-size: 10px; color: rgba(251,113,133,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px; }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1e293b;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      transition: color 0.3s;
+    }
+    .card:hover .card-title { color: #4c0519; }
+    .card-desc { font-weight: 300; color: #64748b; line-height: 1.75; font-size: 0.9375rem; flex: 1; }
+    .card-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(241,245,249,0.8); }
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #0f172a;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 16px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-download::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,#fb7185,#f472b6,#fb7185);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .btn-download:hover::before { opacity: 1; }
+    .btn-download:active { transform: scale(0.98); }
+    .btn-download span { position: relative; z-index: 1; display: flex; align-items: center; gap: 8px; }
+    .btn-download svg { transition: transform 0.3s; }
+    .btn-download:hover svg { transform: translateY(-2px); }
+    .coming-soon-wrap { max-width: 1100px; margin: 80px auto 48px; padding: 0 24px; display: flex; justify-content: center; position: relative; z-index: 10; }
+    .coming-soon {
+      position: relative;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(203,213,225,0.5);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+    }
+    .coming-soon-label {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 4px 16px;
+      border: 1px solid #f1f5f9;
+      border-radius: 9999px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+    .coming-soon h4 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #1e293b; margin-bottom: 12px; }
+    .coming-soon p { font-weight: 300; color: #64748b; line-height: 1.75; }
+    footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid rgba(226,232,240,0.5);
+      padding: 48px 24px;
+      text-align: center;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(8px);
+    }
+    .footer-quote { font-family: 'Playfair Display', serif; font-style: italic; color: #475569; font-size: 1.125rem; margin-bottom: 8px; }
+    .footer-free { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; font-weight: 300; }
+    .footer-credit { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .footer-line { width: 32px; height: 1px; background: #e2e8f0; }
+    .footer-credit a { font-size: 12px; color: #94a3b8; text-decoration: none; transition: color 0.3s; }
+    .footer-credit a:hover { color: #f43f5e; }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <header>
+    <div class="header-eyebrow">
+      <svg class="sparkle" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L13.1118 9.88815L21 11L13.1118 12.1118L12 20L10.8882 12.1118L3 11L10.8882 9.88815L12 2Z" fill="currentColor"/>
+      </svg>
+      <p class="eyebrow-text">Resources for Nonprofits</p>
+      <div class="divider-line"></div>
+    </div>
+    <h1 class="serif">Pretty with <span class="italic-rose">Purpose</span></h1>
+    <p class="subtitle">Curated resource directories designed to empower nonprofits, career centers, and community organizations with the tools they need to flourish.</p>
+    <div class="credit-row">
+      <p class="credit-by">Created with intention by</p>
+      <a href="https://x.com/igotglitteronme" target="_blank" rel="noopener noreferrer" class="credit-badge">
+        <span class="credit-name">MisoPretty</span>
+        <span class="credit-handle">@igotglitteronme</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-cover">
+          <div class="card-cover-glow"></div>
+          <div class="book book-rose">
+            <div class="book-spine-outer"></div><div class="book-spine-inner"></div>
+            <div class="book-top"><div class="book-circle"><div class="book-circle-inner"></div></div></div>
+            <div class="book-body">
+              <p class="book-title">Free Certifications &amp; Training Directory</p>
+              <div class="book-rule"></div>
+              <p class="book-edition">Edition I</p>
+              <p class="book-author">Curated by MisoPretty</p>
+            </div>
+            <div class="book-corner-tr"></div><div class="book-corner-br"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-badge">440+ Resources · 15 Career Sectors</span>
+          <h3 class="card-title">Free Certifications &amp; Training Directory</h3>
+          <p class="card-desc">440+ free certifications and training resources across 15 career sectors — designed for men and women returning to work after employment gaps, including justice-involved individuals, survivors of homelessness, and persons in recovery.</p>
+          <div class="card-footer">
+            <a href="pdfs/free-certifications-training-directory.pdf" download class="btn-download">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resource Guide</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-cover">
+          <div class="card-cover-glow"></div>
+          <div class="book book-stone">
+            <div class="book-spine-outer"></div><div class="book-spine-inner"></div>
+            <div class="book-top"><div class="book-circle"><div class="book-circle-inner"></div></div></div>
+            <div class="book-body">
+              <p class="book-title">Pathways &amp; Provisions Resource Directory</p>
+              <div class="book-rule"></div>
+              <p class="book-edition">Edition I</p>
+              <p class="book-author">Curated by MisoPretty</p>
+            </div>
+            <div class="book-corner-tr"></div><div class="book-corner-br"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-badge">800+ Resources · 13 Categories</span>
+          <h3 class="card-title">Pathways &amp; Provisions Resource Directory</h3>
+          <p class="card-desc">800+ in-kind donation resources across 13 categories for nonprofits serving homeless women &amp; children, drug rehabilitation programs, career centers, and community learning facilities.</p>
+          <div class="card-footer">
+            <a href="pdfs/pathways-and-provisions.pdf" download class="btn-download">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resource Guide</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-cover">
+          <div class="card-cover-glow"></div>
+          <div class="book book-indigo">
+            <div class="book-spine-outer"></div><div class="book-spine-inner"></div>
+            <div class="book-top"><div class="book-circle"><div class="book-circle-inner"></div></div></div>
+            <div class="book-body">
+              <p class="book-title">GiveWise Resource Directory</p>
+              <div class="book-rule"></div>
+              <p class="book-edition">Edition I</p>
+              <p class="book-author">Curated by MisoPretty</p>
+            </div>
+            <div class="book-corner-tr"></div><div class="book-corner-br"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-badge">500+ Organizations · 11 Categories</span>
+          <h3 class="card-title">GiveWise Resource Directory</h3>
+          <p class="card-desc">500+ verified corporations, foundations, and organizations providing in-kind donations organized into 11 practical categories — with strategic outreach guidance for nonprofits.</p>
+          <div class="card-footer">
+            <a href="pdfs/givewise-resource-directory.pdf" download class="btn-download">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resource Guide</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-cover">
+          <div class="card-cover-glow"></div>
+          <div class="book book-amber">
+            <div class="book-spine-outer"></div><div class="book-spine-inner"></div>
+            <div class="book-top"><div class="book-circle"><div class="book-circle-inner"></div></div></div>
+            <div class="book-body">
+              <p class="book-title">The Kinship Resource Atlas</p>
+              <div class="book-rule"></div>
+              <p class="book-edition">Edition I</p>
+              <p class="book-author">Curated by MisoPretty</p>
+            </div>
+            <div class="book-corner-tr"></div><div class="book-corner-br"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-badge">80+ Organizations · 6 Categories</span>
+          <h3 class="card-title">The Kinship Resource Atlas</h3>
+          <p class="card-desc">A comprehensive directory of corporations, foundations, and brands that provide in-kind donations for nonprofits serving homeless women, children, and drug rehabilitation programs.</p>
+          <div class="card-footer">
+            <a href="pdfs/kinship-resource-atlas.pdf" download class="btn-download">
+              <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resource Guide</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="coming-soon-wrap">
+    <div class="coming-soon">
+      <span class="coming-soon-label">Coming Soon</span>
+      <h4>Expanding our horizons</h4>
+      <p>We are constantly cultivating new resources. Return shortly for additional elegant directories curated for diverse communities and specialized needs.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-quote">"Beauty in action, purpose in practice."</p>
+    <p class="footer-free">All resources are complimentary.</p>
+    <div class="footer-credit">
+      <div class="footer-line"></div>
+      <a href="https://x.com/igotglitteronme" target="_blank" rel="noopener noreferrer">MisoPretty @igotglitteronme</a>
+      <div class="footer-line"></div>
+    </div>
+  </footer>
+
+</body>
+</html>
