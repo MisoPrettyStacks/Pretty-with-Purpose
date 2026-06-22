@@ -1,4 +1,4 @@
-https://misoprettystacks.github.io/Pretty-with-Purpose/
+
 # Pretty with Purpose 🌸
 
 > *"Beauty in action, purpose in practice."*
