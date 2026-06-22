@@ -1,4 +1,3 @@
-# [Misoprettystacks.github.io](https://misoprettystacks.github.io/Pretty-with-Purpose/)
 https://misoprettystacks.github.io/Pretty-with-Purpose/
 # Pretty with Purpose 🌸
 
