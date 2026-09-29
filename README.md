@@ -19,7 +19,7 @@ Every guide is free. Every resource is verified. No paywalls, no sign-ups, no st
 
 Curated for men and women returning to work after employment gaps — including justice-involved individuals, survivors of homelessness, and persons in recovery. Contains only free, accessible certifications and training pathways across 15 professional fields.
 
-[📥 Download PDF](https://misoprettystacks.github.io/Pretty-with-Purpose/pdfs/free-certifications-training-directory.pdf)
+*(PDF coming soon — the downloadable guides are being finalized.)*
 
 ---
 
@@ -28,7 +28,7 @@ Curated for men and women returning to work after employment gaps — including 
 
 A comprehensive in-kind donation resource guide for nonprofits serving homeless women and children, drug rehabilitation programs, career centers, and community learning facilities. The largest directory in the collection.
 
-[📥 Download PDF](https://misoprettystacks.github.io/Pretty-with-Purpose/pdfs/pathways-and-provisions.pdf)
+*(PDF coming soon — the downloadable guides are being finalized.)*
 
 ---
 
@@ -37,7 +37,7 @@ A comprehensive in-kind donation resource guide for nonprofits serving homeless 
 
 Verified corporations, foundations, and organizations that provide in-kind donations to nonprofits — organized into 11 practical categories and paired with strategic outreach guidance to help organizations actually land the support they need.
 
-[📥 Download PDF](https://misoprettystacks.github.io/Pretty-with-Purpose/pdfs/givewise-resource-directory.pdf)
+*(PDF coming soon — the downloadable guides are being finalized.)*
 
 ---
 
@@ -46,7 +46,7 @@ Verified corporations, foundations, and organizations that provide in-kind donat
 
 A focused directory of corporations, foundations, and brands that specifically support nonprofits serving homeless women, children, and drug rehabilitation programs — built for targeted, relationship-based resource development.
 
-[📥 Download PDF](https://misoprettystacks.github.io/Pretty-with-Purpose/pdfs/kinship-resource-atlas.pdf)
+*(PDF coming soon — the downloadable guides are being finalized.)*
 
 ---
 
@@ -81,11 +81,7 @@ Pretty with Purpose is a small attempt to close that gap. Curated with care, for
 ```
 Pretty-with-Purpose/
 ├── index.html              # Main landing page
-├── pdfs/
-│   ├── free-certifications-training-directory.pdf
-│   ├── pathways-and-provisions.pdf
-│   ├── givewise-resource-directory.pdf
-│   └── kinship-resource-atlas.pdf
+├── pdfs/                    # PDF resource guides (add files here when ready)
 └── README.md
 ```
 
